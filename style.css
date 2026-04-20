@@ -1,0 +1,86 @@
+:root {
+    --bg: #000000;
+    --accent: #00ff41;
+    --text: #ffffff;
+    --dim: #555555;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+.no-scroll { overflow: hidden; }
+
+/* Canvas rastro del cursor */
+#trail-canvas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 1;
+}
+
+/* INTRO */
+#intro-layer {
+    position: fixed; inset: 0; background: #000;
+    display: flex; justify-content: center; align-items: center; z-index: 9999;
+}
+#intro-text {
+    font-family: 'Syncopate', sans-serif; color: var(--accent);
+    font-size: 2rem; letter-spacing: 15px; opacity: 0; transition: 1.5s; position: absolute;
+}
+#intro-photo { max-width: 300px; opacity: 0; transition: 1.5s; position: absolute; filter: grayscale(1); }
+
+/* MAIN */
+#main-content { opacity: 0; transition: 2s; position: relative; z-index: 10; }
+
+nav { padding: 30px 10%; position: sticky; top: 0; background: rgba(0,0,0,0.9); z-index: 100; border-bottom: 1px solid #111; }
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+.brand { font-family: 'Syncopate', sans-serif; color: var(--accent); font-size: 0.9rem; letter-spacing: 3px; font-weight: 700; }
+.links a { color: var(--text); text-decoration: none; font-size: 0.7rem; margin-left: 25px; opacity: 0.6; font-family: 'Syncopate', sans-serif; }
+.links a:hover { color: var(--accent); opacity: 1; }
+
+#hero { padding: 8% 10%; }
+.hero-grid { display: flex; justify-content: space-between; align-items: center; gap: 50px; }
+.artist-name { font-family: 'Syncopate', sans-serif; font-size: 6vw; color: #ffffff; letter-spacing: -4px; line-height: 1; }
+.status-code { color: var(--accent); font-size: 0.6rem; font-family: 'Syncopate', sans-serif; display: block; margin-bottom: 10px; }
+
+/* PHOTO & COLOR HOVER */
+.hero-image-container { width: 280px; height: 380px; border: 1px solid #222; overflow: hidden; }
+.main-photo { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.8s ease; }
+.hero-image-container:hover .main-photo { filter: grayscale(0) contrast(1.1); }
+
+/* COUNTDOWN */
+#release { padding: 100px 10%; background: #050505; border-top: 1px solid #111; }
+#countdown { display: flex; gap: 40px; margin-top: 40px; }
+.time-box span { font-family: 'Syncopate', sans-serif; font-size: 3rem; color: var(--accent); display: block; }
+.time-box label { font-size: 0.6rem; color: var(--dim); letter-spacing: 2px; }
+
+/* ABOUT */
+#about { padding: 100px 10%; }
+.content-box { border-left: 2px solid var(--accent); padding-left: 40px; }
+.bio { font-size: 1.1rem; line-height: 1.8; color: #ccc; margin-bottom: 20px; max-width: 850px; }
+
+/* BUTTONS NEON GLOW */
+.social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; padding: 0 10%; }
+.social-btn { 
+    border: 1px solid #111; padding: 20px; text-align: center; text-decoration: none; 
+    color: var(--dim); font-size: 0.7rem; letter-spacing: 2px; font-family: 'Syncopate', sans-serif;
+    transition: 0.4s; background: #050505;
+}
+.social-btn:hover { 
+    border-color: var(--accent); color: var(--accent); 
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.3); transform: translateY(-2px);
+}
+
+.email-btn { 
+    display: inline-block; border: 1px solid var(--accent); padding: 15px 50px; 
+    color: var(--accent); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.8rem;
+    transition: 0.4s;
+}
+.email-btn:hover { 
+    background: var(--accent); color: #000; box-shadow: 0 0 30px var(--accent); transform: scale(1.05); 
+}
+
+footer { padding: 50px; text-align: center; color: #222; font-size: 0.6rem; letter-spacing: 2px; }
+
+@media (max-width: 768px) {
+    .hero-grid { flex-direction: column; text-align: center; }
+    .artist-name { font-size: 12vw; }
+    #countdown { gap: 15px; justify-content: center; }
+}
