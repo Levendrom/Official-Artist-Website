@@ -4,11 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const layer = document.getElementById('intro-layer');
     const main = document.getElementById('main-content');
 
-    // 1. SECUENCIA DE INTRO
+    // --- 1. SECUENCIA DE INTRO (Fade In/Out) ---
+    // Aparece Texto
     setTimeout(() => { if(text) text.style.opacity = '1'; }, 800);
+    // Quita Texto
     setTimeout(() => { if(text) text.style.opacity = '0'; }, 2800);
+    // Aparece Foto
     setTimeout(() => { if(photo) photo.style.opacity = '1'; }, 4300);
+    // Quita Foto
     setTimeout(() => { if(photo) photo.style.opacity = '0'; }, 6300);
+    // Revelar Web
     setTimeout(() => {
         if(layer) {
             layer.style.opacity = '0';
@@ -20,11 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 7800);
 
-    // 2. CRONÓMETRO PROTOCOL 14-06
-    const target = new Date("June 14, 2026 00:00:00").getTime();
+    // --- 2. CONTADOR PROTOCOL 14-06 (June 14, 2026) ---
+    const targetDate = new Date("June 14, 2026 00:00:00").getTime();
+    
     setInterval(() => {
         const now = new Date().getTime();
-        const diff = target - now;
+        const diff = targetDate - now;
+        
         if(diff > 0) {
             document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
@@ -33,35 +40,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 1000);
 
-    // 3. RASTRO DE ONDAS DE SONIDO
+    // --- 3. RASTRO DE ONDAS DE SONIDO DEL CURSOR ---
     const canvas = document.getElementById('trail-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
 
-    function resize() {
+    function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
-    window.addEventListener('resize', resize);
-    resize();
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
+    // Crear "onda" al mover el mouse
     window.addEventListener('mousemove', (e) => {
-        particles.push({ x: e.clientX, y: e.clientY, radius: 2, opacity: 1 });
+        particles.push({
+            x: e.clientX,
+            y: e.clientY,
+            radius: 2,
+            opacity: 1
+        });
     });
 
-    function animate() {
+    function animateParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
         for (let i = 0; i < particles.length; i++) {
             let p = particles[i];
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            // Tu verde techno original
             ctx.strokeStyle = `rgba(0, 255, 65, ${p.opacity})`;
             ctx.stroke();
-            p.radius += 1.5;
-            p.opacity -= 0.02;
-            if (p.opacity <= 0) { particles.splice(i, 1); i--; }
+            
+            p.radius += 1.5;   // La onda crece
+            p.opacity -= 0.02; // La onda se desvanece
+            
+            if (p.opacity <= 0) {
+                particles.splice(i, 1);
+                i--;
+            }
         }
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateParticles);
     }
-    animate();
+    animateParticles();
 });
