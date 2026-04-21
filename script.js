@@ -1,87 +1,62 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const text = document.getElementById('intro-text');
-    const photo = document.getElementById('intro-photo');
-    const layer = document.getElementById('intro-layer');
-    const main = document.getElementById('main-content');
+// --- SECUENCIA DE INTRO (FADE IN/OUT) ---
+window.addEventListener('load', () => {
+    const introText = document.getElementById('intro-text');
+    const introPhoto = document.getElementById('intro-photo');
+    const introLayer = document.getElementById('intro-layer');
+    const mainContent = document.getElementById('main-content');
 
-    // --- 1. SECUENCIA DE INTRO (Fade In/Out) ---
-    // Aparece Texto
-    setTimeout(() => { if(text) text.style.opacity = '1'; }, 800);
-    // Quita Texto
-    setTimeout(() => { if(text) text.style.opacity = '0'; }, 2800);
-    // Aparece Foto
-    setTimeout(() => { if(photo) photo.style.opacity = '1'; }, 4300);
-    // Quita Foto
-    setTimeout(() => { if(photo) photo.style.opacity = '0'; }, 6300);
-    // Revelar Web
-    setTimeout(() => {
-        if(layer) {
-            layer.style.opacity = '0';
-            setTimeout(() => {
-                layer.style.display = 'none';
-                if(main) main.style.opacity = '1';
-                document.body.classList.remove('no-scroll');
-            }, 1000);
-        }
-    }, 7800);
-
-    // --- 2. CONTADOR PROTOCOL 14-06 (June 14, 2026) ---
-    const targetDate = new Date("June 14, 2026 00:00:00").getTime();
-    
-    setInterval(() => {
-        const now = new Date().getTime();
-        const diff = targetDate - now;
-        
-        if(diff > 0) {
-            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
-        }
-    }, 1000);
-
-    // --- 3. RASTRO DE ONDAS DE SONIDO DEL CURSOR ---
-    const canvas = document.getElementById('trail-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    // Crear "onda" al mover el mouse
-    window.addEventListener('mousemove', (e) => {
-        particles.push({
-            x: e.clientX,
-            y: e.clientY,
-            radius: 2,
-            opacity: 1
-        });
-    });
-
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        for (let i = 0; i < particles.length; i++) {
-            let p = particles[i];
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            // Tu verde techno original
-            ctx.strokeStyle = `rgba(0, 255, 65, ${p.opacity})`;
-            ctx.stroke();
-            
-            p.radius += 1.5;   // La onda crece
-            p.opacity -= 0.02; // La onda se desvanece
-            
-            if (p.opacity <= 0) {
-                particles.splice(i, 1);
-                i--;
-            }
-        }
-        requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
+    setTimeout(() => { introText.style.opacity = '1'; }, 500);
+    setTimeout(() => { introText.style.opacity = '0'; introPhoto.style.opacity = '1'; }, 2500);
+    setTimeout(() => { 
+        introLayer.style.opacity = '0'; 
+        setTimeout(() => { 
+            introLayer.style.display = 'none'; 
+            mainContent.style.opacity = '1';
+            document.body.classList.remove('no-scroll');
+        }, 1500);
+    }, 5000);
 });
+
+// --- RASTRO DE ONDAS ---
+const canvas = document.getElementById('trail-canvas');
+const ctx = canvas.getContext('2d');
+let points = [];
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+window.addEventListener('mousemove', (e) => {
+    points.push({ x: e.clientX, y: e.clientY, size: 20, opacity: 1 });
+});
+
+function animateTrail() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    points.forEach((p, i) => {
+        p.opacity -= 0.02;
+        p.size += 1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(0, 255, 65, ${p.opacity})`;
+        ctx.stroke();
+        if (p.opacity <= 0) points.splice(i, 1);
+    });
+    requestAnimationFrame(animateTrail);
+}
+animateTrail();
+
+// --- CONTADOR PROTOCOL 14-06 ---
+function updateCountdown() {
+    const target = new Date('June 14, 2026 00:00:00').getTime();
+    const now = new Date().getTime();
+    const diff = target - now;
+
+    document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+    document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+    document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+    document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+}
+setInterval(updateCountdown, 1000);
