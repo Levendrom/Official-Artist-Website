@@ -36,10 +36,15 @@ nav { display: flex; align-items: center; padding: 15px 6%; position: fixed; wid
 .stat-number { font-size: 2.2rem; font-weight: 700; color: #fff; display: block; }
 .stat-label { font-size: 0.65rem; color: var(--accent); letter-spacing: 2px; }
 
-/* Foto con efecto B&N a Color restaurado */
+/* FOTO: Efecto B&N a Color (CORREGIDO) */
 .photo-container { position: relative; max-width: 350px; height: 450px; border: 1px solid #111; overflow: hidden; margin: 0 auto; }
 .profile-photo { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; filter: grayscale(1) contrast(1.1); }
-.photo-container:hover .profile-photo { filter: grayscale(0) contrast(1); transform: scale(1.02); }
+
+/* Esta es la parte que faltaba para que haga el efecto al pasar el mouse */
+.photo-container:hover .profile-photo { 
+    filter: grayscale(0) contrast(1); 
+    transform: scale(1.02); 
+}
 
 /* Contador (PROTOCOL 14-06) */
 #release { padding: 60px 6%; background: #080808; position: relative; z-index: 5; }
@@ -56,7 +61,7 @@ nav { display: flex; align-items: center; padding: 15px 6%; position: fixed; wid
 .section-title { font-family: var(--font-titles); font-size: 1.8rem; margin-bottom: 30px; color: #fff; }
 .bio-content p { font-size: 1rem; line-height: 1.6; color: #ccc; margin-bottom: 15px; }
 
-/* Botones con brillo de marca */
+/* Botones sociales */
 .sc-btn { --brand-color: #ff5500; } 
 .mx-btn { --brand-color: #52aad8; } 
 .yt-btn { --brand-color: #ff0000; } 
@@ -71,6 +76,7 @@ nav { display: flex; align-items: center; padding: 15px 6%; position: fixed; wid
     color: var(--brand-color);
     box-shadow: 0 0 12px var(--brand-color);
     background: rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
 }
 
 .email-btn { grid-column: 1 / -1; border-color: var(--accent) !important; color: var(--accent) !important; }
