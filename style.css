@@ -9,7 +9,7 @@
 body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 .no-scroll { overflow: hidden; }
 
-/* LINEA 13: Rastro visual corregido para cubrir todo el fondo */
+/* Rastro visual en todo el fondo */
 #trail-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; opacity: 0.4; }
 
 /* Intro con Fade */
@@ -19,20 +19,20 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 
 #main-content { opacity: 0; transition: 2s; position: relative; z-index: 10; }
 
+/* Navegación */
 nav { display: flex; align-items: center; padding: 25px 6%; position: fixed; width: 100%; top: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 1000; }
 .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
 .logo { font-family: var(--font-titles); font-weight: 700; color: #fff; font-size: 1rem; letter-spacing: 2px; }
 .nav-links { display: flex; list-style: none; gap: 30px; }
 .nav-links a { font-size: 0.75rem; color: #fff; text-decoration: none; text-transform: uppercase; }
 
+/* Hero Section */
 #hero { height: 100vh; display: flex; align-items: center; padding: 0 6%; }
 .hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; width: 100%; gap: 60px; align-items: center; }
-/* LINEA 33: Titulo mas grande */
 .hero-text-side h1 { font-family: var(--font-titles); font-size: 9vw; line-height: 1.0; letter-spacing: -4px; margin-bottom: 30px; }
 .white-line { color: #fff; }
 .green-line { color: var(--accent); }
 
-/* LINEA 38: Numero de streams corregido */
 .stat-number { font-size: 4rem; font-weight: 700; color: #fff; display: block; }
 .stat-label { font-size: 0.8rem; color: var(--accent); letter-spacing: 2px; }
 
@@ -40,19 +40,28 @@ nav { display: flex; align-items: center; padding: 25px 6%; position: fixed; wid
 .profile-photo { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; filter: grayscale(1) contrast(1.1); }
 .photo-container:hover .profile-photo { filter: grayscale(0) contrast(1); transform: scale(1.02); }
 
-#release { padding: 80px 6%; background: #080808; position: relative; z-index: 5; }
-#about { padding: 80px 6%; position: relative; z-index: 5; }
-.section-title { font-family: var(--font-titles); font-size: 2rem; margin-bottom: 30px; color: #fff; }
-.bio-content p { font-size: 1.1rem; line-height: 1.8; color: #ccc; margin-bottom: 20px; }
+/* CORRECCIÓN DEL CONTADOR (PROTOCOL 14-06) */
+#release { padding: 100px 6%; background: #080808; position: relative; z-index: 5; }
+.release-label { font-size: 1.2rem; color: #fff; margin-bottom: 10px; display: block; }
+#release h2 { font-family: var(--font-titles); font-size: 4vw; margin-bottom: 40px; color: #fff; }
 
-.social-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 80px 6%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 5; }
-/* LINEA 55: Botones mas grandes y con impacto */
+#countdown { display: flex; gap: 40px; margin-top: 20px; }
+.time-block { display: flex; flex-direction: column; align-items: flex-start; }
+.time-block span { font-family: var(--font-titles); font-size: 3.5rem; font-weight: 700; color: #fff; line-height: 1; }
+.time-block label { font-size: 0.8rem; letter-spacing: 2px; color: var(--accent); margin-top: 8px; }
+
+/* About Section */
+#about { padding: 100px 6%; position: relative; z-index: 5; }
+.section-title { font-family: var(--font-titles); font-size: 2.5rem; margin-bottom: 40px; color: #fff; }
+.bio-content p { font-size: 1.2rem; line-height: 1.8; color: #ccc; margin-bottom: 25px; }
+
+/* Botones de Redes y Email */
+.social-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 100px 6%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 5; }
 .social-btn { border: 1px solid #222; padding: 35px; text-decoration: none; color: #fff; font-family: var(--font-titles); font-size: 1rem; transition: 0.4s; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-/* Botón de Email que baja ocupando todo el ancho */
 .email-btn { grid-column: 1 / -1; border-color: var(--accent) !important; color: var(--accent) !important; }
 .email-btn:hover { background: var(--accent); color: #000 !important; }
 
-/* Footer centrado */
-footer { padding: 60px 6%; text-align: center; position: relative; z-index: 5; }
-footer p { font-family: var(--font-titles); font-size: 0.7rem; letter-spacing: 3px; opacity: 0.7; }
+/* Footer */
+footer { padding: 80px 6%; text-align: center; position: relative; z-index: 5; border-top: 1px solid #111; }
+footer p { font-family: var(--font-titles); font-size: 0.8rem; letter-spacing: 4px; opacity: 0.8; color: #fff; }
