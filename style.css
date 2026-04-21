@@ -9,7 +9,7 @@
 body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 .no-scroll { overflow: hidden; }
 
-/* Rastro visual (Intacto) */
+/* Rastro visual */
 #trail-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; opacity: 0.4; }
 
 /* Intro con Fade */
@@ -26,7 +26,7 @@ nav { display: flex; align-items: center; padding: 15px 6%; position: fixed; wid
 .nav-links { display: flex; list-style: none; gap: 20px; }
 .nav-links a { font-size: 0.65rem; color: #fff; text-decoration: none; text-transform: uppercase; }
 
-/* Hero Section (Reducido de 7vw a 5.5vw) */
+/* Hero Section */
 #hero { height: 100vh; display: flex; align-items: center; padding: 0 6%; }
 .hero-grid { display: grid; grid-template-columns: 1fr 1.1fr; width: 100%; gap: 40px; align-items: center; }
 .hero-text-side h1 { font-family: var(--font-titles); font-size: 5.5vw; line-height: 1.1; letter-spacing: -2px; margin-bottom: 20px; }
@@ -36,10 +36,12 @@ nav { display: flex; align-items: center; padding: 15px 6%; position: fixed; wid
 .stat-number { font-size: 2.2rem; font-weight: 700; color: #fff; display: block; }
 .stat-label { font-size: 0.65rem; color: var(--accent); letter-spacing: 2px; }
 
+/* Foto con efecto B&N a Color restaurado */
 .photo-container { position: relative; max-width: 350px; height: 450px; border: 1px solid #111; overflow: hidden; margin: 0 auto; }
 .profile-photo { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; filter: grayscale(1) contrast(1.1); }
+.photo-container:hover .profile-photo { filter: grayscale(0) contrast(1); transform: scale(1.02); }
 
-/* Contador (Reducido de 2.8rem a 2.2rem) */
+/* Contador (PROTOCOL 14-06) */
 #release { padding: 60px 6%; background: #080808; position: relative; z-index: 5; }
 .release-label { font-size: 0.8rem; color: #fff; margin-bottom: 5px; display: block; }
 #release h2 { font-family: var(--font-titles); font-size: 2.2vw; margin-bottom: 25px; color: #fff; }
@@ -54,7 +56,7 @@ nav { display: flex; align-items: center; padding: 15px 6%; position: fixed; wid
 .section-title { font-family: var(--font-titles); font-size: 1.8rem; margin-bottom: 30px; color: #fff; }
 .bio-content p { font-size: 1rem; line-height: 1.6; color: #ccc; margin-bottom: 15px; }
 
-/* Botones (Reducido de 25px a 18px de padding) */
+/* Botones con brillo de marca */
 .sc-btn { --brand-color: #ff5500; } 
 .mx-btn { --brand-color: #52aad8; } 
 .yt-btn { --brand-color: #ff0000; } 
